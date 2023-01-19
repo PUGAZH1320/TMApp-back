@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TaskSchema = new mongoose.Schema ({
+const TagsSchema = new mongoose.Schema ({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'user'
@@ -9,17 +9,8 @@ const TaskSchema = new mongoose.Schema ({
         type: String,
         required: true
     },
-    title:{
+    label:{
         type: String,
-        required: true
-    },
-    markdown:{
-        type: String,
-        required: true,
-        unique: true
-    },
-    tagIds:{
-        type: [String],
         required: true
     },
     date: {
@@ -28,4 +19,4 @@ const TaskSchema = new mongoose.Schema ({
     }
 })
 
-module.exports = Task = mongoose.model('task', TaskSchema);
+module.exports = Tags = mongoose.model('tags', TagsSchema);
