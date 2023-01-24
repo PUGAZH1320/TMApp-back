@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const {check, validationResult } = require('express-validator');
-const User = require('../../models/User')
+const Admin = require('../../models/Admin')
 
 router.post('/',[
     check('name','Name is required').not().isEmpty(),
@@ -20,8 +20,8 @@ router.post('/',[
 
     const {name, email, password } = req.body
     try {
-        let user = await User.findOne({email});
-        if (user) {
+        let admin = await Admin.findOne({email});
+        if (admin) {
             return res.status(400).json({errors: [{msg: 'User already exists'}]})
         }
 
@@ -31,7 +31,7 @@ router.post('/',[
             d: 'mm'
         })
 
-        user = new User ({
+        admin = new Admin ({
             name,
             email,
             avatar,
@@ -39,13 +39,13 @@ router.post('/',[
         })
 
         const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(password, salt);
+        admin.password = await bcrypt.hash(password, salt);
 
-        await user.save();
+        await admin.save();
 
         const payload = {
-            user: {
-                id:user.id
+            admin: {
+                id:admin.id
             }
         }
 

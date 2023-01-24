@@ -5,10 +5,6 @@ const TaskSchema = new mongoose.Schema ({
         type: mongoose.Schema.Types.ObjectId,
         ref:'user'
     },
-    id:{
-        type: String,
-        required: true
-    },
     title:{
         type: String,
         required: true
@@ -16,7 +12,6 @@ const TaskSchema = new mongoose.Schema ({
     markdown:{
         type: String,
         required: true,
-        unique: true
     },
     tagIds:{
         type: [String],
